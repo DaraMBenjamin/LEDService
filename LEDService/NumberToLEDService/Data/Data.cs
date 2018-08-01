@@ -35,8 +35,20 @@ namespace NumberToLEDService.Data
             LEDDisplayInfoModel value;
             if (mydict.TryGetValue(digit, out value))
             {
-                value.Dot = includeDecimal;
-                return value;
+                //value is returning a pointer to the dictionary's item
+                //this is not I want, any similar digit's dot in the list in the service is being changed
+                //For ex 8988.5 will have all the 8's dot to be true
+               return new LEDDisplayInfoModel
+                {
+                    Bottom = value.Bottom,
+                    BottomLeft = value.BottomLeft,
+                    BottomRight = value.BottomRight,
+                    Dot = includeDecimal,
+                    Middle = value.Middle,
+                    Top = value.Top,
+                    TopLeft = value.TopLeft,
+                    TopRight = value.TopRight
+                };
             }
             else
             {
